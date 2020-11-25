@@ -1,12 +1,12 @@
 # LinkyPy K3S
 
-`LinkyPy k3s` is an all-in-one installer of [LinkyPy](https://github.com/rsaikali/linkypy), InfluxDB and Grafana for your RaspberryPi.
+`LinkyPy k3s` is an all-in-one installer of my [LinkyPy](https://github.com/rsaikali/linkypy) Python project, plus InfluxDB and Grafana for your RaspberryPi.
+
+It uses Kubernetes ([k3s/rancher](https://k3s.io/) lighter version) to deploy everything needed.
 
 <p align="center">
     <img src="https://raw.githubusercontent.com/rsaikali/linkypy/main/img/grafana-screenshot.png" width="100%">
 </p>
-
-It uses Kubernetes ([k3s/rancher](https://k3s.io/) lighter version) to deploy everything needed.
 
 ## Hardware needed
 
@@ -133,7 +133,7 @@ Back to the source directory:
 cd ..
 ```
 
-Use kustomization.yaml to configure your settings.
+Use `kustomization.yaml` to configure your settings.
 
 In this file you can:
 - Configure Grafana admin username and password in case you want to login as an administrator to customize the dashboard. Please note that anonymous users can still view the Linky dashboard (but can't change anything). Change `GF_SECURITY_ADMIN_USER` and `GF_SECURITY_ADMIN_PASSWORD` values to reflect your needs.
@@ -177,7 +177,7 @@ secretGenerator:
 
 Save the file and you are ready to go for the next step.
 
-### Install the Linky stack, LinkyPy, InfluxDB and Grafana
+### Install the Linky stack: LinkyPy, InfluxDB and Grafana
 
 You can now launch the installation with:
 ```sh
@@ -212,7 +212,7 @@ influxdb-d6d9fcb9c-tv5g2   1/1     Running   0          60s   10.42.0.65   rpi4-
 linkypy-6775c7bfbf-vb98h   1/1     Running   0          59s   10.42.0.66   rpi4-linky   <none>           <none>
 ```
 
-If everything is `Running', you are done !!
+If everything is `Running`, you are done !!
 
 You can now browse to your RaspberryPi to see the Grafana Linky dashboard:
 
@@ -240,7 +240,7 @@ kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboar
 eyJhbGciOiJSUzI1NiIsImtpZCI6IjUzU0pXZGlRcjJOdnRJc2pmbFNaclVka01YRnpLenkteUp2SUxTNHFDb00ifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsImt1YmVyblV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJhZG1pbi11c2VyLXRva2VuLWZnam1yIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXQ2aWNlLWFjY291bnQubmFtZSI6ImFkbWluLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiIwYjE5YjlkNS1iYTRhLTQxMzAtYjA0NS00OGU4YWNmYjU3ODUiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6a3ViZXJuZXRlcy1kYXNoYm9hcmQ6YWRtaW4tdXNlciJ9.Wr2IRLL7L6PIUVtqk_mUHpxwuAD4RNwgckYnV2uwcpxlfSPZKJENVLlVqEN7Z2XMXXNLYQbglsiq85x4QQqaLkmxNxskCgqNbaHmDao88VMArHFEbAk5eGFf7cJrcIejQ1yUzx4d0ctKcAi6YgTjlC32b9UAU4nNSU1DEuf2hgt5u9lV7JqmLr0r6tnoZHA-lO7yImhRoEiduhRbrhCLGoMD_21Kc5kHrIfnO_xrTJt0GcP15RAiLrEJKFr2kKTWNCpTHWWi4BpUD0FqlUA_90xQ0ifCWURBsqtwA-uKviRak0KKloR8fchLbl2zfOCWE5di6kUa43U367yb6Us4gQ
 ```
 
-Then open the `proxy``
+Then launch the Kubernetes `proxy`
 ```
 kubectl proxy
 ```
