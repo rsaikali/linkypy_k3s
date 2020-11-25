@@ -1,0 +1,51 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+
+  ###############################################################################
+  # InfluxDB
+  ###############################################################################
+  - ./influxdb/influxdb-config.yaml
+  - ./influxdb/influxdb-secrets.yaml
+  - ./influxdb/influxdb-service.yaml
+  - ./influxdb/influxdb-deployment.yaml
+  - ./influxdb/influxdb-job-backup.yaml      # Uses a CIFS mount (see below). Can be commented out if not needed/used.
+  - ./influxdb/influxdb-job-restore.yaml     # Uses a CIFS mount (see below). Can be commented out if not needed/used.
+
+  ###############################################################################
+  # Grafana
+  ###############################################################################
+  - ./grafana/grafana-config.yaml
+  - ./grafana/grafana-secrets.yaml
+  - ./grafana/grafana-service.yaml
+  - ./grafana/grafana-deployment.yaml
+  - ./grafana/grafana-ingress.yaml
+
+  ###############################################################################
+  # LinkyPy
+  ###############################################################################
+  - ./linkypy/linkypy-deployment.yaml
+
+configMapGenerator:
+
+  ###############################################################################
+  # Grafana dashboard for Linky
+  ###############################################################################
+  - name: grafana-linky-dashboard
+    files:
+      - grafana/dashboards/linky.json
+
+secretGenerator:
+
+  ###############################################################################
+  # InfluxDB backup/restore secrets.
+  # If you don't want to use this backup (CIFS mount), please comment out both InfluxDB jobs above (backup and restore).
+  # In my scenario, I use an Apple TimeCapsule to store backups.
+  ###############################################################################
+  - name: influxdb-backup-restore-secrets
+    behavior: replace
+    literals:
+      - CIFS_PATH=//192.168.1.100/my_backup_path
+      - CIFS_USERNAME=admin
+      - CIFS_PASSWORD=password

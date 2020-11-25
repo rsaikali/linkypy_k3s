@@ -1,0 +1,39 @@
+###############################################################################
+# Datasources ConfigMap
+###############################################################################
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-datasources-config
+data:
+  influxdb.yaml: |-
+    apiVersion: 1
+    datasources:
+      - name: influxdb-linky
+        type: influxdb
+        access: proxy
+        orgId: 1
+        version: 1
+        editable: false
+        isDefault: true
+        url: http://influxdb:8086
+        database: linky
+---
+###############################################################################
+# Dashboards ConfigMap
+###############################################################################
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboards-config
+data:
+  dashboards.yaml: |-
+    apiVersion: 1
+    providers:
+      - name: default
+        orgId: 1
+        folder: ''
+        type: file
+        allowUiUpdates: true
+        options:
+          path: '/var/lib/grafana/dashboards'

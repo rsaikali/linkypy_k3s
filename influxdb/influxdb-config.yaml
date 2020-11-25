@@ -1,0 +1,76 @@
+###############################################################################
+# InfluxDB configuration
+###############################################################################
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: influxdb-config
+data:
+  influxdb.conf: |+
+    reporting-disabled = true
+    bind-address = ":8088"
+
+    [meta]
+      dir = "/var/lib/influxdb/meta"
+      logging-enabled = false
+
+    [data]
+      dir = "/var/lib/influxdb/data"
+      wal-dir = "/var/lib/influxdb/wal"
+      index-version = "inmem"
+      cache-max-memory-size = 1073741824
+      cache-snapshot-memory-size = 26214400
+      cache-snapshot-write-cold-duration = "1m0s"
+      compact-full-write-cold-duration = "10m0s"
+      trace-logging-enabled = false
+
+    [coordinator]
+      query-timeout = "5s"
+      log-queries-after = "1s"
+
+    [monitor]
+      store-enabled = false
+
+    [retention]
+      enabled = false
+
+    [http]
+      enabled = true
+      bind-address = ":8086"
+      suppress-write-log = true
+      auth-enabled = false
+      log-enabled = false
+      write-tracing = false
+      pprof-enabled = false
+      pprof-auth-enabled = false
+      ping-auth-enabled = false
+      debug-pprof-enabled = false
+      https-enabled = false
+      https-certificate = "/etc/ssl/influxdb.pem"
+      https-private-key = ""
+      max-row-limit = 0
+      max-connection-limit = 0
+      shared-secret = ""
+      realm = "InfluxDB"
+      unix-socket-enabled = false
+      unix-socket-permissions = "0777"
+      bind-socket = "/var/run/influxdb.sock"
+      max-body-size = 25000000
+      access-log-path = ""
+      max-concurrent-write-limit = 0
+      max-enqueued-write-limit = 0
+      enqueued-write-timeout = 30000000000
+
+    [logging]
+      format = "auto"
+      level = "warn"
+      suppress-logo = true
+
+    [continuous_queries]
+      log-enabled = false
+      enabled = false
+      query-stats-enabled = false
+      run-interval = "1s"
+
+    [subscriber]
+      enabled = false

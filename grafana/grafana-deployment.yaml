@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+spec:
+
+  selector:
+    matchLabels:
+      app: grafana
+
+  template:
+
+    metadata:
+      labels:
+        app: grafana
+
+    spec:
+
+      containers:
+      - name: grafana
+        image: grafana/grafana:7.3.3
+
+        env:
+        - name: GF_INSTALL_PLUGINS
+          value: grafana-clock-panel
+        - name: GF_USERS_DEFAULT_THEME
+          value: dark
+        - name: GF_DASHBOARDS_MIN_REFRESH_INTERVAL
+          value: 1s
+        - name: GF_AUTH_ANONYMOUS_ENABLED
+          value: "true"
+        - name: GF_AUTH_ANONYMOUS_ORG_ROLE
+          value: Viewer
+        - name: GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH
+          value: /var/lib/grafana/dashboards/linky.json
+        - name: GF_SERVER_ENABLE_GZIP
+          value: "true"
+        - name: TZ
+          value: Europe/Paris
+
+        envFrom:
+          - secretRef:
+              name: grafana-secrets
+
+        ports:
+        - name: http
+          containerPort: 3000
+
+        livenessProbe:
+          httpGet:
+            path: /api/health
+            port: 3000
+          initialDelaySeconds: 60
+          timeoutSeconds: 2
+
+        volumeMounts:
+          - name: grafana-datasources-config
+            mountPath: /etc/grafana/provisioning/datasources
+            readOnly: true
+          - name: grafana-dashboards-config
+            mountPath: /etc/grafana/provisioning/dashboards
+            readOnly: true
+          - name: grafana-linky-dashboard
+            mountPath: /var/lib/grafana/dashboards
+            readOnly: true
+
+      volumes:
+        - name: grafana-datasources-config
+          configMap:
+              defaultMode: 420
+              name: grafana-datasources-config
+        - name: grafana-dashboards-config
+          configMap:
+              defaultMode: 420
+              name: grafana-dashboards-config
+        - name: grafana-linky-dashboard
+          configMap:
+              defaultMode: 420
+              name: grafana-linky-dashboard
+
+      terminationGracePeriodSeconds: 1
+      restartPolicy: Always

@@ -1,0 +1,75 @@
+###############################################################################
+# Backup job
+###############################################################################
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: influxdb-backup
+spec:
+
+  schedule: "0 0 * * *"
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+
+  jobTemplate:
+    spec:
+
+      template:
+        metadata:
+          name: influxdb-backup
+          labels:
+            task: influxdb-backup
+
+        spec:
+
+          containers:
+            - name: influxdb-backup
+              image: influxdb:1.8
+
+              securityContext:
+                privileged: true
+                capabilities:
+                  add: ["SYS_ADMIN", "DAC_READ_SEARCH"]
+
+              env:
+                - name: TZ
+                  value: Europe/Paris
+              envFrom:
+                - secretRef:
+                    name: influxdb-backup-restore-secrets
+
+              command:
+                - sh
+                - -c
+                - |
+
+                  ###############################################################################
+                  # Timestamped archive name
+                  timestamped_backup=influxdb.backup.$(date "+%Y.%m.%d-%H.%M.%S").tar.gz
+
+                  ###############################################################################
+                  # Mount CIFS (Apple TimeCapsule in my case)
+                  apt-get update
+                  apt-get install --no-install-recommends -q -y cifs-utils
+                  echo "username=$CIFS_USERNAME" > /tmp/timecapsule.auth
+                  echo "password=$CIFS_PASSWORD" >> /tmp/timecapsule.auth
+                  mkdir -p /mnt/timecapsule
+                  mount.cifs $CIFS_PATH /mnt/timecapsule -o credentials=/tmp/timecapsule.auth,rw,sec=ntlm,iocharset=utf8,vers=1.0
+
+                  ###############################################################################
+                  # InfluxDB backup
+                  influxd backup -host influxdb:8088 -database linky -portable /tmp/influxdb_backup
+
+                  ###############################################################################
+                  # Compress InfluxDB backup
+                  cd /tmp
+                  tar -czvf /mnt/timecapsule/$timestamped_backup influxdb_backup
+
+                  ###############################################################################
+                  # Keep last N backups, remove others
+                  # rm `ls -t /mnt/timecapsule/*.tar.gz | awk 'NR>10'`
+
+                  echo "-------------------------------------------------------------------------------"
+                  echo "Backup ended [$CIFS_PATH/$timestamped_backup]"
+
+          restartPolicy: OnFailure

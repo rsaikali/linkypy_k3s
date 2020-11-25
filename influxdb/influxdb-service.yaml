@@ -1,0 +1,18 @@
+###############################################################################
+# InfluxDB service
+###############################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: influxdb
+spec:
+  selector:
+    app: influxdb
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 8086
+      name: api
+    - protocol: TCP
+      port: 8088
+      name: rpc

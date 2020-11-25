@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: linkypy
+
+spec:
+
+  selector:
+    matchLabels:
+      app: linkypy
+
+  template:
+
+    metadata:
+      labels:
+        app: linkypy
+
+    spec:
+
+      containers:
+
+        - name: linkypy
+          image: rsaikali/linkypy:latest
+
+          env:
+            - name: LINKY_PORT
+              value: "/dev/ttyUSB0"
+            - name: LINKY_BAUDRATE
+              value: "1200"
+            - name: HP_KWH_PRICE
+              value: "0.1657"
+            - name: HC_KWH_PRICE
+              value: "0.1249"
+            - name: MONTHLY_SUBSCRIPTION_PRICE
+              value: "14.34"
+            - name: INFLUXDB_SERVICE_HOST
+              value: influxdb
+            - name: INFLUXDB_SERVICE_PORT
+              value: "8086"
+
+          securityContext:
+            privileged: true
+
+          volumeMounts:
+            - mountPath: /dev/ttyUSB0
+              name: linky-usb
+
+      volumes:
+        - name: linky-usb
+          hostPath:
+            path: /dev/ttyUSB0
+
+      terminationGracePeriodSeconds: 1
+      restartPolicy: Always

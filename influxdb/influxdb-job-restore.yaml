@@ -1,0 +1,93 @@
+###############################################################################
+# Restore job
+###############################################################################
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: influxdb-restore
+spec:
+
+  # Scheduled on february 31th to forbid any automatic launch.
+  # This is a job that'll be executed manually exclusively.
+  schedule: "0 0 31 2 *"
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+
+  jobTemplate:
+
+    spec:
+
+      template:
+        metadata:
+          name: influxdb-restore
+          labels:
+            task: influxdb-restore
+
+        spec:
+
+          containers:
+            - name: influxdb-restore
+              image: influxdb:1.8
+
+              securityContext:
+                privileged: true
+                capabilities:
+                  add: ["SYS_ADMIN", "DAC_READ_SEARCH"]
+
+              env:
+                - name: TZ
+                  value: Europe/Paris
+              envFrom:
+                - secretRef:
+                    name: influxdb-backup-restore-secrets
+
+              command:
+                - sh
+                - -c
+                - |
+
+                  ###############################################################################
+                  # Mount CIFS (Apple TimeCapsule in my case)
+                  apt-get update
+                  apt-get install --no-install-recommends -q -y cifs-utils
+
+                  echo "username=$CIFS_USERNAME" > /tmp/timecapsule.auth
+                  echo "password=$CIFS_PASSWORD" >> /tmp/timecapsule.auth
+                  mkdir -p /mnt/timecapsule
+                  mount.cifs $CIFS_PATH /mnt/timecapsule -o credentials=/tmp/timecapsule.auth,rw,sec=ntlm,iocharset=utf8,vers=1.0
+
+                  ###############################################################################
+                  # Find latest backup
+                  timestamped_backup=$(ls -1rt /mnt/timecapsule/ | tail -1)
+
+                  if [ -z $timestamped_backup ]; then
+                    ###############################################################################
+                    # No backup found, nothing to do
+                    echo "-------------------------------------------------------------------------------"
+                    echo "No backup found. Nothing to restore. Exiting..."
+                    echo "-------------------------------------------------------------------------------"
+                  else
+                    ###############################################################################
+                    # Backup found
+                    echo "-------------------------------------------------------------------------------"
+                    echo "Backup '$timestamped_backup' found. Restoring backup to InfluxDB..."
+                    echo "-------------------------------------------------------------------------------"
+
+                    ###############################################################################
+                    # Uncompress backup archive
+                    mkdir -p /restore
+                    cp /mnt/timecapsule/$timestamped_backup /restore/
+                    tar xvzf /restore/*.tar.gz -C /restore
+
+                    ###############################################################################
+                    # Drop old database if exists
+                    influx -host influxdb -port 8086 -execute 'DROP DATABASE linky'
+
+                    ###############################################################################
+                    # Restoring into InfluxDB
+                    influxd restore -host influxdb:8088 -db linky -portable /restore/influxdb_backup
+                    echo "-------------------------------------------------------------------------------"
+                    echo "Restore [$CIFS_PATH/$timestamped_backup] done."
+                  fi
+
+          restartPolicy: OnFailure

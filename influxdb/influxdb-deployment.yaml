@@ -1,0 +1,62 @@
+###############################################################################
+# InfluxDB deployment
+###############################################################################
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: influxdb
+
+spec:
+
+  selector:
+    matchLabels:
+      app: influxdb
+
+  template:
+
+    metadata:
+      labels:
+        app: influxdb
+
+    spec:
+
+      containers:
+        - image: influxdb:1.8
+          name: influxdb
+
+          ports:
+            - containerPort: 8086
+              name: api
+            - containerPort: 8088
+              name: rpc
+
+          volumeMounts:
+            - name: influxdb-data
+              mountPath: /var/lib/influxdb
+            - name: influxdb-config
+              mountPath: /etc/influxdb/influxdb.conf
+              subPath: influxdb.conf
+              readOnly: true
+
+          env:
+            - name: TZ
+              value: Europe/Paris
+
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: api
+            initialDelaySeconds: 60
+            timeoutSeconds: 2
+
+      volumes:
+        - name: influxdb-data
+          hostPath:
+            path: /mnt/influxdb
+        - name: influxdb-config
+          configMap:
+            name: influxdb-config
+
+      terminationGracePeriodSeconds: 1
+      restartPolicy: Always
