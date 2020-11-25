@@ -1,4 +1,4 @@
-# LinkyPy K3S
+# LinkyPy k3s
 
 `LinkyPy k3s` is an all-in-one installer of my [LinkyPy](https://github.com/rsaikali/linkypy) Python project, plus InfluxDB and Grafana for your RaspberryPi.
 
@@ -29,11 +29,11 @@ The USB dongle is available on [Tindie](https://www.tindie.com/products/hallard/
 
 ### Install `k3sup` and `arkade` on your computer
 
-[`k3sup`](https://github.com/alexellis/k3sup) will help you to remotely install `k3s` (lightweight Kubernetes) to your RaspberryPi while [`arkade`](https://github.com/alexellis/arkade) will help you deploy applications to `k3s`.
+[`k3sup`](https://github.com/alexellis/k3sup) will help you remotely install `k3s` to your RaspberryPi while [`arkade`](https://github.com/alexellis/arkade) will help you deploy applications to `k3s`.
 
 > :warning: This should be installed **ON YOUR COMPUTER**, not on the RaspberryPi.
 
-Folowing the documentation:
+Following the documentation:
 
 ```sh
 # Install k3sup
@@ -137,7 +137,7 @@ Use `kustomization.yaml` to configure your settings.
 
 In this file you can:
 - Configure Grafana admin username and password in case you want to login as an administrator to customize the dashboard. Please note that anonymous users can still view the Linky dashboard (but can't change anything). Change `GF_SECURITY_ADMIN_USER` and `GF_SECURITY_ADMIN_PASSWORD` values to reflect your needs.
-- Configure the backup/restore path and authentication using CIFS mount. In my installation I use an Apple TimeCapsule to store (daily) InfluxDB backups. Change `CIFS_PATH`, `CIFS_USERNAME` and `CIFS_PASSWORD` to reflect your needs. If you don't want to use this backup/restore procedure, you can comment out both job at the top of the file.
+- Configure the backup/restore path and authentication using CIFS mount. In my installation I use an Apple TimeCapsule to store (daily) InfluxDB backups. Change `CIFS_PATH`, `CIFS_USERNAME` and `CIFS_PASSWORD` to reflect your needs. If you don't want to use this backup/restore procedure, you can comment out both jobs at the top of the file.
 
 Edit the file with:
 ```sh
