@@ -26,6 +26,11 @@ prepare_raspberry() {
     echo "--------------------------------------------------------------------------------"
     ssh pi@$NODE_IP sudo apt-get -q --no-install-recommends -y upgrade
 
+    # Disable swap
+    ssh pi@$NODE_IP sudo swapoff /var/swap
+    ssh pi@$NODE_IP sudo systemctl disable dphys-swapfile
+    ssh pi@$NODE_IP sudo rm -f /var/swap
+
     # Set timezone
     echo "--------------------------------------------------------------------------------"
     echo "Timezone settings"
@@ -53,6 +58,7 @@ prepare_raspberry() {
     echo "Reboot"
     echo "--------------------------------------------------------------------------------"
     ssh pi@$NODE_IP sudo reboot || true
+    sleep 5
 
     # Wait for reboot and SSH is up
     while ! ssh -o BatchMode=yes -o StrictHostKeyChecking=no -o ConnectTimeout=10 pi@$NODE_IP exit 2>/dev/null; do
