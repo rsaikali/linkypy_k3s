@@ -39,13 +39,24 @@ configMapGenerator:
 secretGenerator:
 
   ###############################################################################
+  # Grafana secrets.
+  # Sets the Grafana login/password in case you want to change things.
+  # Please note that anonymous viewer can still view the Linky dashboard (but can't change anything).
+  ###############################################################################
+  - name: grafana-secrets
+    behavior: replace
+    literals:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=password
+
+  ###############################################################################
   # InfluxDB backup/restore secrets.
   # If you don't want to use this backup (CIFS mount), please comment out both InfluxDB jobs above (backup and restore).
-  # In my scenario, I use an Apple TimeCapsule to store backups.
+  # In my use case, I use an Apple TimeCapsule to store backups.
   ###############################################################################
   - name: influxdb-backup-restore-secrets
     behavior: replace
     literals:
-      - CIFS_PATH=//192.168.1.100/my_backup_path
-      - CIFS_USERNAME=admin
+      - CIFS_PATH=//192.168.1.100/Data/Linky_backups
+      - CIFS_USERNAME=username
       - CIFS_PASSWORD=password

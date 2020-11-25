@@ -53,14 +53,3 @@ subjects:
   namespace: kubernetes-dashboard
 ---
 EOF
-
-###############################################################################
-# INSTALL LinkyPy stack
-###############################################################################
-cd ..
-kubectl apply -k .
-
-echo "###############################################################################"
-echo "IUnstallation completed."
-echo "Watching pods, press Ctrl-C when you want to quit..."
-kubectl get pods -o wide --watch
