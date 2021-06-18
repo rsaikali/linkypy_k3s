@@ -6,6 +6,9 @@ metadata:
 
 spec:
 
+  strategy:
+    type: RollingUpdate
+
   selector:
     matchLabels:
       app: linkypy
@@ -28,12 +31,10 @@ spec:
               value: "/dev/ttyUSB0"
             - name: LINKY_BAUDRATE
               value: "1200"
-            - name: HP_KWH_PRICE
-              value: "0.1657"
-            - name: HC_KWH_PRICE
-              value: "0.1249"
-            - name: MONTHLY_SUBSCRIPTION_PRICE
-              value: "14.34"
+
+            - name: CURRENT_POWER
+              value: "9"
+
             - name: INFLUXDB_SERVICE_HOST
               value: influxdb
             - name: INFLUXDB_SERVICE_PORT
