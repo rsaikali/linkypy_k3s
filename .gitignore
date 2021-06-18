@@ -1,2 +1,3 @@
 .vscode/settings.json
 .tmuxinator.yml
+scripts/kubeconfig
