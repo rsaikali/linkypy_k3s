@@ -9,6 +9,9 @@ metadata:
 
 spec:
 
+  strategy:
+    type: RollingUpdate
+
   selector:
     matchLabels:
       app: influxdb

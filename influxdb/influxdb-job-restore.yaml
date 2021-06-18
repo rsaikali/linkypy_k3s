@@ -10,8 +10,9 @@ spec:
   # Scheduled on february 31th to forbid any automatic launch.
   # This is a job that'll be executed manually exclusively.
   schedule: "0 0 31 2 *"
-  successfulJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 0
   failedJobsHistoryLimit: 1
+  concurrencyPolicy: Forbid
 
   jobTemplate:
 
@@ -90,4 +91,4 @@ spec:
                     echo "Restore [$CIFS_PATH/$timestamped_backup] done."
                   fi
 
-          restartPolicy: OnFailure
+          restartPolicy: Never

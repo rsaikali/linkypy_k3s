@@ -25,14 +25,14 @@ data:
       trace-logging-enabled = false
 
     [coordinator]
-      query-timeout = "5s"
-      log-queries-after = "1s"
+      query-timeout = "10s"
+      log-queries-after = "5s"
 
     [monitor]
       store-enabled = false
 
     [retention]
-      enabled = false
+      enabled = true
 
     [http]
       enabled = true
@@ -68,9 +68,7 @@ data:
 
     [continuous_queries]
       log-enabled = false
-      enabled = false
-      query-stats-enabled = false
-      run-interval = "1s"
+      enabled = true
 
     [subscriber]
       enabled = false

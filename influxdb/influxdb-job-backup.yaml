@@ -8,8 +8,9 @@ metadata:
 spec:
 
   schedule: "0 0 * * *"
-  successfulJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 0
   failedJobsHistoryLimit: 1
+  concurrencyPolicy: Forbid
 
   jobTemplate:
     spec:

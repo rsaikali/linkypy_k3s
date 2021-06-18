@@ -51,7 +51,7 @@ prepare_raspberry() {
     echo "--------------------------------------------------------------------------------"
     echo "CGroups settings"
     echo "--------------------------------------------------------------------------------"
-    ssh pi@$NODE_IP sudo sed -i "s/rootwait/cgroup_enable=cpuset\ cgroup_memory=1\ cgroup_enable=memory\ rootwait/g" /boot/cmdline.txt
+    ssh pi@$NODE_IP sudo sed -i "s/rootwait/cgroup_enable=cpuset\ cgroup_memory=1\ cgroup_enable=memory\ quiet rootwait/g" /boot/cmdline.txt
 
     # Reboot
     echo "--------------------------------------------------------------------------------"
