@@ -1,3 +1,4 @@
 .vscode/settings.json
 .tmuxinator.yml
 scripts/kubeconfig
+.DS_Store
