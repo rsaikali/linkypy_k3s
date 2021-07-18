@@ -17,7 +17,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 1,
-  "iteration": 1624544451304,
+  "iteration": 1626605470317,
   "links": [],
   "panels": [
     {
@@ -231,22 +231,22 @@
             {
               "from": "-0.5",
               "id": 2,
-              "text": "↓",
-              "to": "-1000",
+              "text": "⇌",
+              "to": "0.5",
               "type": 2,
               "value": "-0.5"
             },
             {
-              "from": "-0.5",
+              "from": "-1000",
               "id": 3,
-              "text": "⇌",
-              "to": "0.5",
+              "text": "↓",
+              "to": "-0.5",
               "type": 2,
               "value": ""
             }
           ],
           "thresholds": {
-            "mode": "percentage",
+            "mode": "absolute",
             "steps": [
               {
                 "color": "dark-green",
