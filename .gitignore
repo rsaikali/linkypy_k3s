@@ -2,3 +2,4 @@
 .tmuxinator.yml
 scripts/kubeconfig
 scripts/kubeconfig.yaml
+.DS_Store
