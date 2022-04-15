@@ -47,7 +47,7 @@ secretGenerator:
     behavior: replace
     literals:
       - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=p5a2r$1977
+      - GF_SECURITY_ADMIN_PASSWORD=admin
 
   ###############################################################################
   # InfluxDB backup/restore secrets.
@@ -58,5 +58,5 @@ secretGenerator:
     behavior: replace
     literals:
       - CIFS_PATH=//192.168.1.18/Data/Backups
-      - CIFS_USERNAME=rsaikali
-      - CIFS_PASSWORD=p5a2r$1977
+      - CIFS_USERNAME=root
+      - CIFS_PASSWORD=admin
