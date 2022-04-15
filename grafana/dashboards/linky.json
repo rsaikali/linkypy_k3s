@@ -8,20 +8,26 @@
         "hide": true,
         "iconColor": "rgba(1, 211, 255, 1)",
         "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
         "type": "dashboard"
       }
     ]
   },
   "description": "",
   "editable": true,
-  "gnetId": null,
+  "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": 1,
-  "iteration": 1625869602314,
+  "iteration": 1646826345328,
   "links": [],
+  "liveNow": false,
   "panels": [
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -68,7 +74,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "7.5.9",
+      "pluginVersion": "8.4.3",
       "targets": [
         {
           "alias": "",
@@ -96,7 +102,6 @@
         }
       ],
       "timeFrom": "1h",
-      "timeShift": null,
       "title": "${provider} (${offer_name}/${offer_type})",
       "transformations": [
         {
@@ -113,7 +118,6 @@
       "type": "stat"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -164,7 +168,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.9",
+      "pluginVersion": "8.4.3",
       "targets": [
         {
           "alias": "Facture actuelle",
@@ -207,12 +211,10 @@
         }
       ],
       "timeFrom": "5s",
-      "timeShift": null,
       "title": "Facture actuelle",
       "type": "stat"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -222,27 +224,34 @@
           },
           "mappings": [
             {
-              "from": "0.5",
-              "id": 1,
-              "text": "↑",
-              "to": "1000",
-              "type": 2
+              "options": {
+                "from": 0.5,
+                "result": {
+                  "text": "↑"
+                },
+                "to": 1000
+              },
+              "type": "range"
             },
             {
-              "from": "-0.5",
-              "id": 2,
-              "text": "⇌",
-              "to": "0.5",
-              "type": 2,
-              "value": "-0.5"
+              "options": {
+                "from": -0.5,
+                "result": {
+                  "text": "⇌"
+                },
+                "to": 0.5
+              },
+              "type": "range"
             },
             {
-              "from": "-0.5",
-              "id": 3,
-              "text": "↓",
-              "to": "-1000",
-              "type": 2,
-              "value": ""
+              "options": {
+                "from": -1000,
+                "result": {
+                  "text": "↓"
+                },
+                "to": -0.5
+              },
+              "type": "range"
             }
           ],
           "thresholds": {
@@ -286,7 +295,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "7.5.9",
+      "pluginVersion": "8.4.3",
       "targets": [
         {
           "alias": "Facture now",
@@ -330,12 +339,10 @@
         }
       ],
       "timeFrom": "5s",
-      "timeShift": null,
       "transformations": [],
       "type": "stat"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -386,7 +393,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.9",
+      "pluginVersion": "8.4.3",
       "targets": [
         {
           "alias": "Facture estimée",
@@ -429,12 +436,10 @@
         }
       ],
       "timeFrom": "5s",
-      "timeShift": null,
       "title": "Facture estimée",
       "type": "stat"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -480,7 +485,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.9",
+      "pluginVersion": "8.4.3",
       "targets": [
         {
           "alias": "Heures pleines",
@@ -529,12 +534,10 @@
         }
       ],
       "timeFrom": "5s",
-      "timeShift": null,
       "title": "Heures pleines",
       "type": "stat"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -580,7 +583,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.9",
+      "pluginVersion": "8.4.3",
       "targets": [
         {
           "alias": "Heures creuses",
@@ -629,12 +632,10 @@
         }
       ],
       "timeFrom": "5s",
-      "timeShift": null,
       "title": "Heures creuses",
       "type": "stat"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -661,7 +662,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
+        "h": 10,
         "w": 4,
         "x": 0,
         "y": 2
@@ -685,7 +686,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "7.5.9",
+      "pluginVersion": "8.4.3",
       "targets": [
         {
           "alias": "Puissance instantanée",
@@ -728,7 +729,6 @@
         }
       ],
       "timeFrom": "5s",
-      "timeShift": null,
       "title": "Puissance instantanée",
       "type": "stat"
     },
@@ -739,7 +739,6 @@
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -750,7 +749,7 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 9,
+        "h": 10,
         "w": 20,
         "x": 4,
         "y": 2
@@ -775,7 +774,7 @@
         "alertThreshold": false
       },
       "percentage": false,
-      "pluginVersion": "7.5.9",
+      "pluginVersion": "8.4.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -786,6 +785,10 @@
       "targets": [
         {
           "alias": "Puissance",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P0611B27635070C5B"
+          },
           "groupBy": [
             {
               "params": [
@@ -818,6 +821,12 @@
               {
                 "params": [],
                 "type": "last"
+              },
+              {
+                "params": [
+                  10
+                ],
+                "type": "moving_average"
               }
             ]
           ],
@@ -825,9 +834,8 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": "3m",
+      "timeFrom": "5m",
       "timeRegions": [],
-      "timeShift": null,
       "title": "Puissance instantanée",
       "tooltip": {
         "shared": true,
@@ -836,9 +844,7 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
@@ -846,29 +852,22 @@
         {
           "$$hashKey": "object:75",
           "format": "watt",
-          "label": null,
           "logBase": 1,
-          "max": null,
           "min": "0",
           "show": true
         },
         {
           "$$hashKey": "object:76",
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -895,10 +894,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
+        "h": 5,
         "w": 4,
         "x": 0,
-        "y": 11
+        "y": 12
       },
       "hideTimeOverride": true,
       "id": 21,
@@ -919,7 +918,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "7.5.9",
+      "pluginVersion": "8.4.3",
       "targets": [
         {
           "alias": "Puissance moyenne année",
@@ -961,8 +960,6 @@
           "tags": []
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Puissance moyenne historique",
       "type": "stat"
     },
@@ -973,7 +970,6 @@
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -984,15 +980,14 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 9,
+        "h": 10,
         "w": 20,
         "x": 4,
-        "y": 11
+        "y": 12
       },
       "hiddenSeries": false,
       "hideTimeOverride": true,
       "id": 11,
-      "interval": null,
       "legend": {
         "avg": false,
         "current": false,
@@ -1004,13 +999,12 @@
       },
       "lines": false,
       "linewidth": 1,
-      "maxDataPoints": 365,
       "nullPointMode": "null",
       "options": {
         "alertThreshold": false
       },
       "percentage": false,
-      "pluginVersion": "7.5.9",
+      "pluginVersion": "8.4.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1021,6 +1015,10 @@
       "targets": [
         {
           "alias": "Puissance",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P0611B27635070C5B"
+          },
           "groupBy": [
             {
               "params": [
@@ -1030,7 +1028,7 @@
             },
             {
               "params": [
-                "none"
+                "linear"
               ],
               "type": "fill"
             }
@@ -1051,6 +1049,12 @@
               {
                 "params": [],
                 "type": "mean"
+              },
+              {
+                "params": [
+                  5
+                ],
+                "type": "moving_average"
               }
             ]
           ],
@@ -1058,9 +1062,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Historique puissance",
       "tooltip": {
         "shared": true,
@@ -1070,9 +1072,7 @@
       "transformations": [],
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
@@ -1080,48 +1080,208 @@
         {
           "$$hashKey": "object:99",
           "format": "watt",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "$$hashKey": "object:100",
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": false
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
-      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "rgb(173, 173, 173)",
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "text": "UP"
+                },
+                "to": 1000
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": -1000,
+                "result": {
+                  "text": "DOWN"
+                },
+                "to": 0
+              },
+              "type": "range"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-yellow",
+                "value": null
+              },
+              {
+                "color": "dark-green",
+                "value": -1
+              },
+              {
+                "color": "dark-red",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "watt"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 0,
+        "y": 17
+      },
+      "hideTimeOverride": true,
+      "id": 33,
+      "interval": "",
+      "maxDataPoints": 1,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "text": {},
+        "textMode": "value"
+      },
+      "pluginVersion": "8.4.3",
+      "targets": [
+        {
+          "alias": "2021",
+          "groupBy": [
+            {
+              "params": [
+                "365d"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "linear"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "linky",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT mean(PAPP) FROM linky_mean WHERE time >= 1609455600000ms and time <= 1640991599999ms\n",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "PAPP"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "1y",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT mean(PAPP) FROM linky_mean WHERE time > now() - 365d",
+          "rawQuery": true,
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Hausse sur l'année",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "diff"
+            ]
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
           },
+          "mappings": [],
           "unit": "kwatth"
         },
         "overrides": [
@@ -1161,7 +1321,7 @@
         "h": 7,
         "w": 4,
         "x": 0,
-        "y": 20
+        "y": 22
       },
       "id": 32,
       "options": {
@@ -1184,7 +1344,8 @@
         },
         "text": {},
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "pluginVersion": "7.5.7",
@@ -1254,9 +1415,11 @@
       "type": "piechart"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
+          "color": {
+            "mode": "fixed"
+          },
           "custom": {
             "align": "center",
             "displayMode": "auto",
@@ -1272,15 +1435,16 @@
                 "value": null
               },
               {
-                "color": "dark-orange",
-                "value": 30
+                "color": "#EAB839",
+                "value": 33
               },
               {
                 "color": "dark-red",
-                "value": 70
+                "value": 66
               }
             ]
-          }
+          },
+          "unit": "none"
         },
         "overrides": [
           {
@@ -1290,12 +1454,35 @@
             },
             "properties": [
               {
+                "id": "unit",
+                "value": "currencyEUR"
+              },
+              {
                 "id": "custom.displayMode",
                 "value": "color-text"
               },
               {
-                "id": "unit",
-                "value": "€"
+                "id": "color"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "#EAB839",
+                      "value": 120
+                    },
+                    {
+                      "color": "red",
+                      "value": 150
+                    }
+                  ]
+                }
               }
             ]
           }
@@ -1305,10 +1492,17 @@
         "h": 7,
         "w": 7,
         "x": 4,
-        "y": 20
+        "y": 22
       },
       "id": 26,
       "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
         "showHeader": false,
         "sortBy": [
           {
@@ -1317,9 +1511,13 @@
           }
         ]
       },
-      "pluginVersion": "7.5.9",
+      "pluginVersion": "8.4.3",
       "targets": [
         {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P0611B27635070C5B"
+          },
           "groupBy": [
             {
               "params": [
@@ -1348,10 +1546,32 @@
           "tags": []
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Historique factures",
       "transformations": [
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "desc": false,
+                "field": "month_number"
+              }
+            ]
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "desc": false,
+                "field": "year_number 1"
+              }
+            ]
+          }
+        },
         {
           "id": "filterFieldsByName",
           "options": {
@@ -1368,60 +1588,72 @@
       "type": "table"
     },
     {
-      "aliasColors": {},
-      "bars": true,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
+          "color": {
+            "fixedColor": "dark-red",
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMin": 0,
+            "fillOpacity": 100,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 0,
+            "scaleDistribution": {
+              "type": "linear"
+            }
+          },
+          "mappings": [],
+          "min": 50,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
           "unit": "currencyEUR"
         },
         "overrides": []
       },
-      "fill": 1,
-      "fillGradient": 0,
       "gridPos": {
         "h": 7,
         "w": 6,
         "x": 11,
-        "y": 20
+        "y": 22
       },
-      "hiddenSeries": false,
       "id": 29,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": false,
-        "total": false,
-        "values": false
-      },
-      "lines": false,
-      "linewidth": 1,
-      "maxDataPoints": null,
-      "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "barRadius": 0,
+        "barWidth": 0.8,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "hidden",
+          "placement": "bottom"
+        },
+        "orientation": "auto",
+        "showValue": "never",
+        "stacking": "normal",
+        "tooltip": {
+          "mode": "none",
+          "sort": "none"
+        },
+        "xField": "Time",
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
       },
-      "percentage": false,
       "pluginVersion": "7.5.9",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "repeat": null,
       "repeatDirection": "v",
-      "seriesOverrides": [
-        {
-          "$$hashKey": "object:630",
-          "alias": "/.*/",
-          "color": "#C4162A"
-        }
-      ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
       "targets": [
         {
           "alias": "$tag_month_number/$tag_year_number",
@@ -1462,56 +1694,11 @@
           "tags": []
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
       "title": "Factures",
-      "tooltip": {
-        "shared": false,
-        "sort": 0,
-        "value_type": "individual"
-      },
       "transformations": [],
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "max": null,
-        "min": null,
-        "mode": "series",
-        "name": null,
-        "show": true,
-        "values": [
-          "total"
-        ]
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:426",
-          "format": "currencyEUR",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "$$hashKey": "object:427",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": false
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "barchart"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1610,12 +1797,18 @@
         "h": 7,
         "w": 7,
         "x": 17,
-        "y": 20
+        "y": 22
       },
-      "hideTimeOverride": true,
+      "hideTimeOverride": false,
       "id": 24,
-      "interval": null,
       "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
         "showHeader": false,
         "sortBy": [
           {
@@ -1624,7 +1817,7 @@
           }
         ]
       },
-      "pluginVersion": "7.5.9",
+      "pluginVersion": "8.4.3",
       "targets": [
         {
           "alias": "$tag_provider ($tag_offer_name / $tag_offer_type)",
@@ -1646,12 +1839,18 @@
                 "offer_type"
               ],
               "type": "tag"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
             }
           ],
           "measurement": "prices",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT last(ESTIMATED_COST) FROM prices_mean GROUP BY provider, offer_name, offer_type",
+          "query": "SELECT last(ESTIMATED_COST) FROM prices_mean WHERE time > now() - 1h GROUP BY provider, offer_name, offer_type\n\n",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "table",
@@ -1665,11 +1864,15 @@
               }
             ]
           ],
-          "tags": []
+          "tags": [
+            {
+              "key": "time",
+              "operator": "=",
+              "value": "select tag value"
+            }
+          ]
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Comparateur des offres électricité",
       "transformations": [
         {
@@ -1704,22 +1907,22 @@
     }
   ],
   "refresh": "1s",
-  "schemaVersion": 27,
+  "schemaVersion": 35,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": [
       {
-        "allValue": null,
         "current": {
           "selected": false,
           "text": "Total Direct Energie",
           "value": "Total Direct Energie"
         },
-        "datasource": "influxdb-linky",
+        "datasource": {
+          "type": "influxdb",
+          "uid": "P0611B27635070C5B"
+        },
         "definition": "SHOW TAG VALUES FROM linky_rp.prices WITH KEY=\"provider\"",
-        "description": null,
-        "error": null,
         "hide": 0,
         "includeAll": false,
         "label": "Fournisseur",
@@ -1732,22 +1935,21 @@
         "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
       },
       {
-        "allValue": null,
         "current": {
           "selected": false,
           "text": "online",
           "value": "online"
         },
-        "datasource": "influxdb-linky",
+        "datasource": {
+          "type": "influxdb",
+          "uid": "P0611B27635070C5B"
+        },
         "definition": "SHOW TAG VALUES FROM linky_rp.prices WITH KEY=\"offer_name\" WHERE provider='${provider}'",
-        "description": null,
-        "error": null,
         "hide": 0,
         "includeAll": false,
         "label": "Offre",
@@ -1760,22 +1962,21 @@
         "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
       },
       {
-        "allValue": null,
         "current": {
           "selected": false,
           "text": "HPHC",
           "value": "HPHC"
         },
-        "datasource": "influxdb-linky",
+        "datasource": {
+          "type": "influxdb",
+          "uid": "P0611B27635070C5B"
+        },
         "definition": "SHOW TAG VALUES FROM linky_rp.prices WITH KEY=\"offer_type\" WHERE provider='${provider}' AND offer_name='${offer_name}'",
-        "description": null,
-        "error": null,
         "hide": 0,
         "includeAll": false,
         "label": "Type",
@@ -1788,7 +1989,6 @@
         "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -1796,7 +1996,7 @@
     ]
   },
   "time": {
-    "from": "now/y",
+    "from": "now-1y",
     "to": "now"
   },
   "timepicker": {
@@ -1811,5 +2011,6 @@
   "timezone": "browser",
   "title": "Linky",
   "uid": "linkypy",
-  "version": 1
+  "version": 1,
+  "weekStart": ""
 }
